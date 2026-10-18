@@ -1,0 +1,8 @@
+{
+  "name": "sazonika-web",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "bun run index.ts", "dev": "bun --watch index.ts" },
+  "dependencies": { "hono": "^4.6.0" },
+  "engines": { "bun": ">=1.1" }
+}
