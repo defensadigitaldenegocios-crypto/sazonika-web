@@ -40,7 +40,14 @@ async function notify(text: string) {
 function auth(c: any) {
   const u = Bun.env.SAZONIKA_ADMIN_USER, p = Bun.env.SAZONIKA_ADMIN_PASS;
   if (!u || !p) return false;
-  return (c.req.header("authorization") || "") === "Basic " + Buffer.from(u + ":" + p).toString("base64");
+  const h = c.req.header("authorization") || "";
+  if (!/^basic /i.test(h)) return false;
+  let dec = "";
+  try { dec = Buffer.from(h.slice(6).trim(), "base64").toString("utf8"); } catch { return false; }
+  const i = dec.indexOf(":");
+  if (i < 0) return false;
+  const clean = (s: string) => s.normalize("NFC").trim().replace(/^["']|["']$/g, "");
+  return clean(dec.slice(0, i)).toLowerCase() === clean(u).toLowerCase() && clean(dec.slice(i + 1)) === clean(p);
 }
 const needAuth = (c: any) => c.text("Autenticación requerida", 401, { "WWW-Authenticate": 'Basic realm="Sazonika"' });
 async function stripeOK(raw: string, header: string, secret: string) {
