@@ -170,6 +170,9 @@ section{position:relative;padding:120px 0}
 .lab{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
 .scanner{position:relative;border-radius:16px;overflow:hidden;background:#0b0909;border:1px solid var(--line)}
 .scanner img{width:100%}
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:center;margin-top:34px}
+.revs img{width:100%;height:auto;border-radius:22px;box-shadow:0 20px 50px rgba(0,0,0,.55),0 0 0 1px rgba(242,179,61,.25)}
+@media(max-width:900px){.revs{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto}}
 .pback{position:sticky;top:110px;display:flex;justify-content:center;padding:10px 0}
 .pback::before{content:"";position:absolute;inset:12% 8%;background:radial-gradient(closest-side,rgba(226,52,40,.35),transparent);filter:blur(30px);z-index:0}
 .pback img{position:relative;z-index:1;width:100%;max-width:400px;height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
@@ -472,6 +475,9 @@ ${nav()}
 <section id="tienda"><div class="wrap" style="text-align:center"><p class="eyb rv">04 · Tienda en línea</p><h2 class="h2 rv d1">Llévalo a tu <span class="g">parrilla.</span></h2><p class="sub rv d2" style="margin:0 auto">Elige tu paquete y paga con tarjeta. Enviamos a todo México.</p>
 <div class="packs" style="text-align:left">${STORE.map(packCard).join("")}</div>
 <p class="storeNote rv">Pago seguro con tarjeta procesado por Stripe. Te pedimos tu dirección y teléfono al pagar para enviarte tu pedido. ¿Dudas? <a href="${wa("Hola Sazonika, tengo una duda sobre mi pedido")}" style="color:var(--gold)" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>.</p></div></section>
+
+<section id="opiniones" style="padding-top:20px;padding-bottom:40px"><div class="wrap" style="text-align:center"><p class="eyb rv">Opiniones</p><h2 class="h2 rv d1">Lo que dicen <span class="g">quienes ya lo usan.</span></h2></div>
+<div class="wrap revs"><img class="rv d1" src="/img/review-1.webp" alt="Opinión de Chef Roberto G., Monterrey: lo usó en cortes, hamburguesas y pollo; sabor intenso, equilibrado y profesional" loading="lazy" width="1090" height="1033"><img class="rv d2" src="/img/review-2.webp" alt="Opinión de Luis R., Escobedo: le da un sabor increíble a la carne en asados y hamburguesas" loading="lazy" width="1150" height="880"><img class="rv d3" src="/img/review-3.webp" alt="Opinión de Andrea G., San Nicolás: lo usó en carne asada familiar y pollo, lo volvería a comprar" loading="lazy" width="1112" height="1105"></div></section>
 
 <section id="comercios"><div class="wrap b2b">
 <div><p class="eyb r rv">05 · Para comercios</p><h2 class="h2 rv d1">Vende Sazonika <span class="g">sin invertir un peso.</span></h2>
