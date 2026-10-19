@@ -160,6 +160,10 @@ section{position:relative;padding:120px 0}
 .lab{display:grid;grid-template-columns:.85fr 1.15fr;gap:40px;align-items:start}
 .scanner{position:relative;border-radius:16px;overflow:hidden;background:#0b0909;border:1px solid var(--line)}
 .scanner img{width:100%}
+.pback{position:sticky;top:110px;display:flex;justify-content:center;padding:10px 0}
+.pback::before{content:"";position:absolute;inset:12% 8%;background:radial-gradient(closest-side,rgba(226,52,40,.35),transparent);filter:blur(30px);z-index:0}
+.pback img{position:relative;z-index:1;width:100%;max-width:400px;height:auto;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+@media(max-width:900px){.pback{position:relative;top:0}.pback img{max-width:300px}}
 .scanner .beam{position:absolute;left:0;right:0;height:90px;background:linear-gradient(180deg,transparent,rgba(242,179,61,.18),transparent);border-bottom:2px solid var(--gold);box-shadow:0 8px 24px rgba(242,179,61,.4);animation:beam 4s ease-in-out infinite alternate}
 @keyframes beam{from{top:-90px}to{top:100%}}
 .spec{padding:30px 32px}
@@ -439,7 +443,7 @@ ${nav()}
 
 <section id="ficha"><div class="wrap"><p class="eyb rv">03 · Ficha del producto</p><h2 class="h2 rv d1">Sazonika Original, <span class="g">Umami Blend.</span></h2>
 <div class="lab" style="margin-top:34px">
-<div class="scanner rv d1"><img src="/img/label-back.webp" alt="Reverso de la etiqueta de Sazonika Original con ingredientes, modo de uso y declaración nutrimental" loading="lazy" width="1024" height="1536"><div class="beam"></div></div>
+<div class="pback rv d1"><img src="/img/pouch-back.webp" alt="Reverso del empaque de Sazonika Original con ingredientes, modo de uso y declaración nutrimental" loading="lazy" width="627" height="948"></div>
 <div class="glass spec rv d2"><dl>
 <div class="row"><dt>Tipo</dt><dd>Intensificador de sabores para carne</dd></div>
 <div class="row"><dt>Contenido</dt><dd>30 g · 6 porciones de 5 g</dd></div>
