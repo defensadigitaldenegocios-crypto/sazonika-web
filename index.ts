@@ -7,6 +7,9 @@ const WA_NUM = "528181139153";
 const WA_TXT = "81 8113 9153";
 const IG = "https://instagram.com/sazonika.mty";
 const IG_TXT = "@sazonika.mty";
+const MAIL_HELP = "ayuda@sazonika.com";
+const MAIL_SALES = "valeria@sazonika.com";
+const mailto = (m: string, subj: string) => "mailto:" + m + "?subject=" + encodeURIComponent(subj);
 const ADDR = "Av. Raúl Salinas Lozano 1101, Valle Nord, Escobedo, N.L., México";
 const wa = (t: string) => "https://wa.me/" + WA_NUM + "?text=" + encodeURIComponent(t);
 const SHIP = 12900; // envío nacional
@@ -312,7 +315,7 @@ function nav() {
 }
 function foot() {
   return `<footer><div class="wrap"><div><img src="/img/logo.webp" alt="Sazonika" width="120" height="66"><p style="margin-top:14px;max-width:360px">Intensificador de sabores para carne. Fórmula Umami Blend hecha 100% en Nuevo León.</p></div>
-<div><h4>Contacto</h4><div class="lst"><a href="${IG}" target="_blank" rel="noopener" style="display:inline-flex;gap:8px;align-items:center">${IG_SVG} ${IG_TXT}</a><a href="${wa("Hola Sazonika, tengo una pregunta")}" target="_blank" rel="noopener">WhatsApp ${WA_TXT}</a><p>${ADDR}</p></div></div>
+<div><h4>Contacto</h4><div class="lst"><a href="${IG}" target="_blank" rel="noopener" style="display:inline-flex;gap:8px;align-items:center">${IG_SVG} ${IG_TXT}</a><a href="${wa("Hola Sazonika, tengo una pregunta")}" target="_blank" rel="noopener">WhatsApp ${WA_TXT}</a><a href="${mailto(MAIL_HELP, "Ayuda con mi pedido")}">Clientes: ${MAIL_HELP}</a><a href="${mailto(MAIL_SALES, "Sazonika para mi negocio")}">Comercios: ${MAIL_SALES}</a><p>${ADDR}</p></div></div>
 <div><h4>Sitio</h4><div class="lst"><a href="/#tienda">Tienda en línea</a><a href="/#comercios">Vende Sazonika en tu negocio</a><a href="/envios">Envíos y devoluciones</a><a href="/aviso-de-privacidad">Aviso de privacidad</a></div></div></div>
 <div class="wrap legal">© ${new Date().getFullYear()} Sazonika® · Sazonadores de alto nivel · Hecho en Nuevo León, México. Contiene derivados de soya. Pagos con tarjeta procesados de forma segura por Stripe.</div></footer>
 <a class="waF" href="${wa("Hola Sazonika, quiero hacer un pedido")}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">${WA_SVG}</a>`;
@@ -484,7 +487,7 @@ ${nav()}
 <div class="fld"><label for="lz">Colonia y municipio</label><input id="lz" name="zone" required maxlength="100"></div>
 <input type="text" name="web" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
 <button class="btn btnP" style="width:100%" type="submit">Quiero mi primera ristra</button>
-<div class="okMsg" id="okMsg" role="status"></div></form>
+<div class="okMsg" id="okMsg" role="status"></div><p style="margin-top:14px;font-size:14px;color:var(--mut);text-align:center">¿Prefieres correo? Escríbele a Valeria: <a style="color:var(--gold)" href="${mailto(MAIL_SALES, "Sazonika para mi negocio")}">${MAIL_SALES}</a></p></form>
 </div></section>
 
 <section id="faq"><div class="wrap" style="text-align:center"><p class="eyb rv">06 · Preguntas frecuentes</p><h2 class="h2 rv d1">Todo lo que <span class="g">quieres saber.</span></h2></div><div class="wrap"><div class="faq">${faq}</div></div></section>
@@ -523,7 +526,7 @@ app.get("/comprar/:sku", c => {
   return c.redirect(wa(`Hola Sazonika, quiero comprar el ${p.name} (${money(p.price)}${p.ship ? " + envío " + money(p.ship) : ", envío gratis"}).`), 302);
 });
 
-app.get("/gracias", c => c.html(simple("Gracias por tu compra · Sazonika", "Pedido recibido", "/gracias", `<div class="center"><div class="glass card"><img src="/img/logo.webp" alt="Sazonika" width="170" height="94" style="margin:0 auto"><div class="ok">✓</div><h1 class="os" style="font-size:36px">¡Gracias por tu compra!</h1><p style="color:var(--mut);margin:12px 0 26px">Stripe te enviará la confirmación por correo. Te avisaremos cuando salga tu pedido y te compartiremos tu guía de rastreo.</p><a class="btn btnP" href="/">Volver a Sazonika</a><p style="color:var(--dim);font-size:14px;margin-top:18px">¿Ayuda con tu pedido? <a style="color:var(--gold)" href="${wa("Hola Sazonika, acabo de hacer un pedido")}">WhatsApp ${WA_TXT}</a></p></div></div>`, true)));
+app.get("/gracias", c => c.html(simple("Gracias por tu compra · Sazonika", "Pedido recibido", "/gracias", `<div class="center"><div class="glass card"><img src="/img/logo.webp" alt="Sazonika" width="170" height="94" style="margin:0 auto"><div class="ok">✓</div><h1 class="os" style="font-size:36px">¡Gracias por tu compra!</h1><p style="color:var(--mut);margin:12px 0 26px">Stripe te enviará la confirmación por correo. Te avisaremos cuando salga tu pedido y te compartiremos tu guía de rastreo.</p><a class="btn btnP" href="/">Volver a Sazonika</a><p style="color:var(--dim);font-size:14px;margin-top:18px">¿Ayuda con tu pedido? <a style="color:var(--gold)" href="${wa("Hola Sazonika, acabo de hacer un pedido")}">WhatsApp ${WA_TXT}</a> · <a style="color:var(--gold)" href="${mailto(MAIL_HELP, "Ayuda con mi pedido")}">${MAIL_HELP}</a></p></div></div>`, true)));
 
 app.get("/envios", c => c.html(simple("Envíos y devoluciones · Sazonika", "Política de envíos, cambios y devoluciones de Sazonika.", "/envios", `<article class="doc"><p class="eyb">Políticas</p><h1>Envíos y devoluciones</h1>
 <h2>Cobertura y costo</h2><p>Enviamos a todo México. El envío cuesta ${money(SHIP)} en los paquetes de 3 y 6 sobres, y es gratis en la ristra de 10 sobres.</p>
@@ -531,14 +534,14 @@ app.get("/envios", c => c.html(simple("Envíos y devoluciones · Sazonika", "Pol
 <h2>Pagos</h2><p>Los pagos con tarjeta se procesan en la página segura de Stripe. Sazonika no recibe ni guarda los datos de tu tarjeta.</p>
 <h2>Producto dañado o incorrecto</h2><p>Si tu pedido llega dañado, abierto o incompleto, escríbenos dentro de los 7 días siguientes a la entrega con una foto del paquete y del producto. Te enviamos el reemplazo sin costo o te devolvemos tu dinero.</p>
 <h2>Devoluciones</h2><p>Por tratarse de un alimento, no aceptamos devoluciones de sobres abiertos, salvo por defecto del producto. Los sobres cerrados y en buen estado pueden devolverse dentro de los 7 días siguientes a la entrega; el costo del envío de regreso corre por cuenta del cliente.</p>
-<h2>Contacto</h2><p>WhatsApp <a style="color:var(--gold)" href="${wa("Hola Sazonika, tengo una duda sobre mi envío")}">${WA_TXT}</a> · Instagram <a style="color:var(--gold)" href="${IG}">${IG_TXT}</a></p></article>`)));
+<h2>Contacto</h2><p>WhatsApp <a style="color:var(--gold)" href="${wa("Hola Sazonika, tengo una duda sobre mi envío")}">${WA_TXT}</a> · Instagram <a style="color:var(--gold)" href="${IG}">${IG_TXT}</a> · Correo <a style="color:var(--gold)" href="${mailto(MAIL_HELP, "Duda sobre mi envío")}">${MAIL_HELP}</a></p></article>`)));
 
 app.get("/aviso-de-privacidad", c => c.html(simple("Aviso de privacidad · Sazonika", "Aviso de privacidad de Sazonika.", "/aviso-de-privacidad", `<article class="doc"><p class="eyb">Legal</p><h1>Aviso de privacidad</h1>
 <p>Sazonika, con domicilio en ${ADDR}, es responsable del tratamiento de tus datos personales conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares.</p>
 <h2>Datos que recabamos</h2><p>Para compras en línea: nombre, correo electrónico, teléfono y dirección de envío. Para comercios interesados en la consignación: nombre, nombre y tipo de negocio, WhatsApp y zona. No recabamos datos sensibles. Los datos de tu tarjeta los procesa directamente Stripe y no llegan a Sazonika.</p>
 <h2>Finalidades</h2><ul><li>Procesar, enviar y dar seguimiento a tus pedidos.</li><li>Contactarte para atender dudas, aclaraciones o devoluciones.</li><li>Contactar a los comercios interesados para ofrecerles el producto en consignación.</li></ul>
 <h2>Transferencias</h2><p>Compartimos tus datos solo con los proveedores necesarios para operar: procesador de pagos (Stripe), paquetería y servicios de alojamiento. No vendemos ni rentamos tus datos.</p>
-<h2>Derechos ARCO</h2><p>Puedes solicitar el acceso, rectificación, cancelación u oposición al uso de tus datos, o revocar tu consentimiento, escribiéndonos por WhatsApp al ${WA_TXT}. Responderemos en un plazo máximo de 20 días hábiles.</p>
+<h2>Derechos ARCO</h2><p>Puedes solicitar el acceso, rectificación, cancelación u oposición al uso de tus datos, o revocar tu consentimiento, escribiéndonos a <a style="color:var(--gold)" href="mailto:${MAIL_HELP}">${MAIL_HELP}</a> o por WhatsApp al ${WA_TXT}. Responderemos en un plazo máximo de 20 días hábiles.</p>
 <h2>Cambios</h2><p>Cualquier cambio a este aviso se publicará en esta página.</p><p style="margin-top:20px;color:var(--dim)">Última actualización: octubre de 2026.</p></article>`)));
 
 // B2B lead
